@@ -1,0 +1,194 @@
+:root {
+	--primary-color: #00bcd4;
+	--accent-color: #f50057;
+
+	--text-color: #263238;
+	--body-color: #80deea;
+	--main-font: 'roboto';
+	--font-bold: 700;
+	--font-regular: 400;
+}
+* { box-sizing: border-box }
+
+body {
+	color: var(--text-color);
+	background-color: var(--body-color);
+	font-family: var(--main-font), Arial;
+	font-weight: var(--font-regular);
+}
+
+main{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+h1 { font-weight: var(--font-bold) }
+
+input, button {
+	border: none;
+	background: none;
+	outline: 0;
+}
+
+button {cursor: pointer}
+
+.SearchBox-input::placeholder {
+ color:white;
+	opacity: .6;
+}
+
+.SearchBox {
+	--height: 4em;
+	display: flex;
+
+	border-radius: var(--height);
+	background-color: var(--primary-color);
+	height: var(--height);
+}
+
+	/* .SearchBox:hover .SearchBox-input {
+		padding-left: 2em;
+		padding-right: 1em;
+		width: 240px;
+	} */
+    .SearchBox-input:hover, .SearchBox-input:focus, .SearchBox-input:active
+    {
+        padding-left: 2em;
+        padding-right: 1em;
+        width: 240px;
+    }
+
+	.SearchBox-input
+	{
+		padding-left: 2em;
+		padding-right: 1em;
+		width: 240px;
+	}
+	/* .SearchBox:hover .SearchBox-input {
+	background-color: white;
+      width: 490px;
+      height: 40px;
+
+    } */
+	.SearchBox-input {
+		width: 0;
+		font-size: 1.2em;
+		color: #fff;
+		transition: .45s;
+	}
+	.SearchBox-button {
+		/* display: flex; */
+		border-radius: 50%;
+		width: var(--height);
+		height: var(--height);
+		background-color: var(--accent-color);
+		transition: .3s;
+        font-size: 1em;
+	}
+	.SearchBox-button:active  {
+		transform: scale(.85);
+	}
+	.SearchBox-icon {
+		margin: auto;
+		color: #fff;
+	}
+
+
+/* @media screen and (min-width: 400px){
+	.SearchBox:hover .SearchBox-input
+	.SearchBox:focus .SearchBox-input,{
+		width: 500px;
+	}
+} */
+
+
+.loader,
+.loader:before,
+.loader:after {
+  background: var(--text-color);
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: var(--accent-color);
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+#loadingDiv {
+	position:absolute;
+	left: 11px;
+	width:100%;
+	height:100%;
+}
+
+
+.image_gen
+{
+	max-width: 500px;
+	max-height: 320px;
+	position: relative;
+}
+
+.frame {
+	width: 550px;
+	height: 420px;
+	position: absolute;
+    left: -60px;
+    top: -50px;
+}
+
+.image_space {
+    /* position:relative; */
+}

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- add the jQuery library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <title> PHOTO HUB </title>
+    </head>
+    <body>
+        <script src="../static/js/script.js"></script>
+	    <main>
+            <div class="helper">
+	               <h1>START TYPING TO GENERATE IMAGE</h1>
+            </div>
+	        <div class="wrapper">
+	        	<div class="SearchBox">
+		        	<form method="POST" id="search-form" class="SearchBox" autocomplete="off">
+		        		{% csrf_token %}
+		        		<input type="text" class="SearchBox-input" id="text" placeholder="horse">
+
+		        		<button type="submit" class="SearchBox-button">
+		                    <i class="SearchBox-icon  material-icons">search</i>
+		                </button>
+		        	</form>
+	        	</div>
+                <p></p>
+                <div style="position: absolute; left: 50%;">
+                  <div class='image_show' style="position: relative; left: -50%; margin-top: 50px">
+
+                  </div>
+                </div>
+
+	        </div>
+
+	    </main>
+        <!-- <div class="loader">Loading...</div> -->
+    </body>
+    <script>
+    	$(document).on('submit', '#search-form',function(e){
+    		e.preventDefault();
+            $( ".helper" ).remove();
+            $( ".image_gen" ).remove();
+            $( ".frame" ).remove();
+
+            var my_searchbar = $('main');
+
+            my_searchbar.animate({ marginTop: '-250px', marginLeft: '0px'}, 1000, function() {
+            });
+            $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+
+		    $.ajax({
+		        type:'POST',
+		        url:'{% url "main" %}',
+		        data:{
+		            text:$('#text').val(),
+		            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+		            action: 'post'
+		        },
+		        success:function(json){
+
+                    $( "#loadingDiv" ).fadeOut(100, function() {
+                      $( "#loadingDiv" ).remove(); //makes page more lightweight
+                    });
+
+                    $('.image_show').prepend('<img class="frame" src="../static/img/frame.png" />')
+                    $('.image_show').prepend('<img class="image_gen" src="../static/img/photo_1.jpeg" />')
+		        },
+		        error : function(xhr,errmsg,err) {
+		        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+		        }
+	        });
+        });
+    </script>
+</html>
